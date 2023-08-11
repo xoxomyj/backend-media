@@ -29,10 +29,15 @@ E   AND &&
 OU  OR  ||
 Negaçao NOT !
 
+conversâo de string para número:
+    parseInt() - converte uma string para numeros inteiros
+    parseFloat() - converte uma string para numeros reais
+    Number() - converte uma string para numero inteiro ou real conforme a ncessidade
 */
 
 //import da biblioteca de entrada de dados do teclado
 var readline = require('readline');
+const { isNumber } = require('util');
 
 //criando objeto entradaDeDados 
 var entradaDeDados = readline.createInterface({
@@ -46,44 +51,38 @@ entradaDeDados.question('Digite o seu nome: ', function(nomeUsuario){
      var nome = nomeUsuario;
 
 //entrada de dados da primeira nota
-entradaDeDados.question('Digite a primiera nota: ', function(notaumUsuario){
+entradaDeDados.question('Digite a primeira nota: ', function(notaumUsuario){
     //recebe a primeira nota digitada
-    var notaum = notaumUsuario;
-    //converte a nota para int
-    var notaum =  parseInt(notaumUsuario);
+    var notaum = Number(notaumUsuario);
 
 //entrada de dados da segunda nota
 entradaDeDados.question('Digite a segunda nota: ', function(notadoUsuario){
     //recebe a segunda nota digitada
-    var notadois = notadoUsuario;
-    //converte a nota para int
-    var notadois =  parseInt(notadoUsuario);
+    var notadois = Number(notadoUsuario);
 
 //entrada de dados da terceira nota
 entradaDeDados.question('Digite a terceira nota: ', function(notatreUsuario){
     //recebe a terceira nota digitada
-    var notatres = notatreUsuario;
-    //converte a nota para int
-    var notatres =  parseInt(notatreUsuario);
+    var notatres = Number(notatreUsuario);
 
 //entrada de dados da quarta nota
 entradaDeDados.question('Digite a quarta nota: ', function(notaquaUsuario){
     //recebe a quarta nota digitada
-    var notaquatro = notaquaUsuario;
-    //converte a nota para int
-    var notaquatro =  parseInt(notaquaUsuario);
+    var notaquatro = Number(notaquaUsuario);
 
-    if(notaum == '')
+//validaçâo para entrada de dados caso esteja vazio
+    if(notaum == '' || notadois == '' || notatres == '' || notaquatro == ''){
+        console.log("ERRO: é obrigatório todas as notas!!")
 
-//calculando média das notas
-    var media;
+//validaçâo para entrada de dados de valores nâo númericos
+    }else if(isNaN(notaum) || isNaN(notadois) || isNaN(notatres) || isNaN(notaquatro) ){
+        console.log('ERRO: é obrgatorio apresentar notas com numeros!!')
+    }else{
     //calcula a média das quatro notas
-    media = (notaum + notadois + notatres + notaquatro)/4 ;
-
-//exibe uma mensagem no terminal com o conteudo digitado
-    console.log('Bem vindo ao sistema de notas, ' + nome);
-    console.log('A sua média final é: ', + media)
-
+         var media = (notaum + notadois + notatres + notaquatro)/4 
+        console.log('Bem vindo ao sistema de notas, ' + nome);
+        console.log('A sua média final é: ', + media)
+    }
 
 });
 });
